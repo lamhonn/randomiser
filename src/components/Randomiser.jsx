@@ -26,6 +26,7 @@ const Randomiser = () => {
     const [delayOn, setDelayOn] = useState(false);
 
     const [winnerDialog, setWinnerDialog] = useState(false);
+    const [dialogWinners, setDialogWinners] = useState('');
 
     const [shuffling, setShuffling] = useState(false);
     
@@ -49,6 +50,7 @@ const Randomiser = () => {
         const parts = participants.split('\n').filter(item => item.match(/[\s\S]/g));
         const list = raffle(parts, number);
         const winnerList = list.join('\n');
+        setDialogWinners(list.join(', '));
 
         if(delayOn && parts.length >= number) {
             setShuffling(true);
@@ -95,7 +97,7 @@ const Randomiser = () => {
                         Voittaja(t):
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        {winners}
+                        {dialogWinners}
                     </Typography>
                 </Box>
             </Modal>
@@ -132,29 +134,15 @@ const Randomiser = () => {
                         />
                     </Grid>
                     <Grid item xs={12} md={6}>
-                        {shuffling ?
-                            <>
-                                <Typography>
-                                    Arvonta käynnissä...
-                                </Typography>
-                                <CircularProgress
-                                size={50}
-                                sx={{
-                                    my: 2
-                                }}
-                                />
-                            </>
-                            :
-                            <TextField
-                            label="Voittajat"
-                            variant="outlined"
-                            multiline
-                            rows={8}
-                            fullWidth
-                            value={winners}
-                            disabled
-                            />
-                        }
+                        <TextField
+                        label="Voittajat"
+                        variant="outlined"
+                        multiline
+                        rows={8}
+                        fullWidth
+                        value={winners}
+                        disabled
+                        />
                     </Grid>
 
                     <Grid item xs={6} md={4}>
