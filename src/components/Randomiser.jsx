@@ -25,8 +25,6 @@ const Randomiser = () => {
     
     const [delayOn, setDelayOn] = useState(false);
 
-    const [button, setButton] = useState(false);
-
     const [winnerDialog, setWinnerDialog] = useState(false);
     const [dialogWinners, setDialogWinners] = useState('');
 
@@ -46,6 +44,7 @@ const Randomiser = () => {
         const list = raffle(parts, number);
         const winnerList = list.join('\n');
         setDialogWinners(list.join(', '));
+        console.log(list);
 
         if(delayOn && parts.length >= number) {
             setShuffling(true);
@@ -126,6 +125,12 @@ const Randomiser = () => {
                         value={participants}
                         onChange={(e) => setParticipants(e.target.value)}
                         disabled={shuffling}
+                        sx={{
+                            '& .MuiInputBase-root': {
+                              borderRadius: '8px',
+                              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                            },
+                          }}
                         />
                     </Grid>
                     <Grid item xs={12} md={6}>
@@ -137,22 +142,33 @@ const Randomiser = () => {
                         fullWidth
                         value={winners}
                         disabled
+                        sx={{
+                            '& .MuiInputBase-root': {
+                              borderRadius: '8px',
+                              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                            },
+                          }}
                         />
                     </Grid>
 
                     <Grid item xs={6} md={4}>
-                        <FormControl fullWidth variant="outlined">
-                        <InputLabel htmlFor="number-input">Montako voittajaa?</InputLabel>
-                        <OutlinedInput
+                        <TextField
                             id="number-input"
                             type="number"
+                            step={1}
                             value={number}
                             onChange={(e) => setNumber(e.target.value)}
                             inputProps={{ min: 0 }}
                             label="Montako voittajaa?"
                             disabled={shuffling}
+                            fullWidth
+                            sx={{
+                                '& .MuiInputBase-root': {
+                                  borderRadius: '8px',
+                                  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                                },
+                              }}
                         />
-                        </FormControl>
                     </Grid>
                     <Grid item xs={6} md={4}>
                         <Button 

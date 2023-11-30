@@ -1,6 +1,8 @@
 // Function for picking a random winner among the participant list
 export default function raffle(participants, winners) {
-    if(winners > participants.length || !winners.isInteger() || winners <= 0) {
+    if(winners > participants.length) {
+        console.log(participants)
+        console.log(winners)
         return ['Virhe!'];
     };
 
