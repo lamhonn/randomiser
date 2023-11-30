@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
     TextField,
     Typography, 
@@ -25,6 +25,8 @@ const Randomiser = () => {
     
     const [delayOn, setDelayOn] = useState(false);
 
+    const [button, setButton] = useState(false);
+
     const [winnerDialog, setWinnerDialog] = useState(false);
     const [dialogWinners, setDialogWinners] = useState('');
 
@@ -33,13 +35,6 @@ const Randomiser = () => {
     const [confetti, setConfetti] = useState(false);
 
     var drumroll = new Audio('https://cdn.freesound.org/sounds/191/191718-4a9c9bdc-1d7b-408f-acc1-e40eef59543d?filename=191718__adriann__drumroll.wav');
-
-    const handleNumberChange = (e) => {
-        const value = e.target.value;
-        if (value >= 1) {
-        setNumber(value);
-        }
-    };
 
     const handleCheckboxChange = (event) => {
         setDelayOn(event.target.checked);
@@ -152,7 +147,7 @@ const Randomiser = () => {
                             id="number-input"
                             type="number"
                             value={number}
-                            onChange={handleNumberChange}
+                            onChange={(e) => setNumber(e.target.value)}
                             inputProps={{ min: 0 }}
                             label="Montako voittajaa?"
                             disabled={shuffling}

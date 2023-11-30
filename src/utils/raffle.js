@@ -1,7 +1,6 @@
 // Function for picking a random winner among the participant list
 export default function raffle(participants, winners) {
-    if(winners > participants.length) {
-        alert('Voittajia ei voi olla enemmän kuin osallistujia!')
+    if(winners > participants.length || !winners.isInteger() || winners <= 0) {
         return ['Virhe!'];
     };
 
